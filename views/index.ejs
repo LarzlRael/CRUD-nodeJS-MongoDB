@@ -1,0 +1,66 @@
+<% include partials/_header %>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-5">
+            <div class="card card-body">
+                <form action="/add" method="POST" id="form">
+                    <div class="form-group">
+                        <input type="text" name="title" id="title" class="form-control" placeholder="Ingrese su titulo">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="description" id="description" class="form-control" placeholder="Ingrese su descripcion">
+                    </div>
+                    <input type="submit" value="Enviar" class="btn btn-success btn-block" id='button'>
+                </form>
+                <div id="error_box" class="bg-danger mt-4">
+                    <p style="color: antiquewhite"></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <thead>
+                        <tr class="text-uppercase">
+                            <th>N</th>
+                            <th>titulo</th>
+                            <th>descripcion</th>
+                            <th>operaciones</th>
+                        </tr>
+                    </thead>
+                <tbody>
+                    <% for(var i = 0; i < tasks.length ; i++){ %>
+                    <tr>
+                        <td>
+                            <%= i+1 %>
+                        </td>
+                        <td>
+                            <%= tasks[i].title %>
+                        </td>
+                        <td>
+                            <%= tasks[i].description %>
+                        </td>
+                        <td>
+                            <a href="/turn/<%= tasks[i].id %>" class="btn <%= tasks[i].status ? 'btn-success':'btn-dark' %>">
+                                <%= tasks[i].status ? 'Realizado' : 'No realizado'%>
+                            </a>
+                            <a href="/editar/<%= tasks[i].id %>" class="btn btn-info">Editar</a>
+                            <a href="/eliminar/<%= tasks[i].id %>" class="btn btn-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                    <% } %>
+                </tbody>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script
+  src="https://code.jquery.com/jquery-3.3.1.slim.js"
+  integrity="sha256-fNXJFIlca05BIO2Y5zh1xrShK3ME+/lYZ0j+ChxX2DA="
+  crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+<script src="js/main.js"></script>
+<% include partials/_footer %>
